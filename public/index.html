@@ -13,5 +13,29 @@
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+    <script src="https://moknews.com/upload/js/jquery-2.1.1.min.js"></script>
+    <script src="https://backend-prod.hivexads.com/upload/js/prebid2.4-ssp.js"></script>
+    <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+    <script src="https://backend-prod.hivexads.com/upload/js/hivex.js"></script>
+    <script>
+    var pbjs = pbjs || {};
+pbjs.que = pbjs.que || [];
+var data = getConfig();
+initPrebid(pbjs);
+  
+//=======================================================
+window.googletag = window.googletag || {cmd: []};	
+
+googletag.cmd = googletag.cmd || [];
+googletag.cmd.push(function() {
+	googletag.pubads().disableInitialLoad();
+});
+
+// in case PBJS doesn't load
+setTimeout(function() {
+	initAdserver();
+}, FAILSAFE_TIMEOUT);
+postAds(googletag,data);
+    </script>
   </body>
 </html>

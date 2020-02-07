@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: Card;
+  src: url('../font/card.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Public;
+  src: url('../font/PublicoHeadline-Bold-Reduced.woff.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: YaHei;
+  src: url('../font/微软雅黑.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
