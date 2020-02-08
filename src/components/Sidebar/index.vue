@@ -92,7 +92,6 @@ export default {
     }
     .el-menu {
       border-right: none;
-      font-family: YaHei;
     }
   }
 </style>
