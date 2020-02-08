@@ -1,5 +1,5 @@
 <template>
-  <div v-loading.fullscreen.lock="loading" class="news">
+  <div class="news">
     <Header />
     <side-bar />
     <div class="news-detail">
@@ -46,9 +46,9 @@ export default {
       },
       newsQuery: {
         current: 1,
-        size: 3,
+        size: 5,
         status: 1,
-        type: '',
+        type: undefined,
         flag: 1
       },
       newsList: undefined,
@@ -63,8 +63,16 @@ export default {
   },
   async created() {
     this.loading = true
-    await Promise.all([this.getArticleDetail(), this.getNewsList()])
+    const loading = this.$loading({
+      lock: true,
+      text: 'Loading',
+      spinner: 'el-icon-loading',
+      background: 'rgba(0, 0, 0, 0.7)'
+    })
+    await this.getArticleDetail()
+    await this.getNewsList()
     this.loading = false
+    loading.close()
   },
   methods: {
     /**
@@ -74,6 +82,7 @@ export default {
       try {
         const result = await getNewsDetail(this.id)
         const { data } = result
+        this.newsQuery.type = data.type
         this.article = data
         this.article.detail = this.article.detail.replace(/&lt;/g, '<').replace(/&gt;/g, '>')
         this.loading = false

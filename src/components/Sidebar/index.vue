@@ -50,7 +50,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('app', ['sideStatus', 'appid', 'channelId'])
+    ...mapGetters('app', ['sideStatus', 'utm_source', 'utm_campaign'])
   },
   created() {
     if (this.$route.query.newsType) {
@@ -73,8 +73,8 @@ export default {
         this.$router.push({
           name: 'home',
           query: {
-            appid: this.appid,
-            channelId: this.channelId
+            utm_source: this.utm_source,
+            utm_campaign: this.utm_campaign
           }
         })
       } else {

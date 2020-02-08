@@ -6,7 +6,7 @@
       class="card-news-detail"
     >
       <div class="card-news-image">
-        <el-image :src="item.newsImgUrl" fit="fill" @click="goArticle(item.id)" />
+        <el-image :src="item.newsImgUrl" fit="fill" @click="goArticle(item)" />
       </div>
       <div class="card-news-description">
         <el-button
@@ -36,7 +36,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('app', ['appid', 'channelId'])
+    ...mapGetters('app', ['utm_source', 'utm_campaign'])
   },
   methods: {
     /**
@@ -48,15 +48,16 @@ export default {
     /**
      * @description 全文章详页
      */
-    goArticle(id) {
+    goArticle(item) {
       this.$router.push({
         name: 'news',
         params: {
-          id: id
+          id: item.id,
+          type: item.type
         },
         query: {
-          appid: this.appid,
-          channelId: this.channelId
+          utm_source: this.utm_source,
+          utm_campaign: this.utm_campaign
         }
       })
     },

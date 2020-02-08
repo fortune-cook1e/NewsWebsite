@@ -8,7 +8,7 @@
       @loading-news="loadingMore"
       @get-type-news="getTypeNews"
     />
-    <loading-more @loading-more="loadingMore" />
+    <loading-more v-if="!maxLoading" @loading-more="loadingMore" />
     <Footer v-if="!loading" />
   </div>
 </template>
@@ -36,12 +36,13 @@ export default {
     return {
       newsQuery: {
         current: 1,
-        size: 6,
+        size: 8,
         status: 1,
         type: '',
         flag: 1
       },
       loading: false,
+      maxLoading: false,
       total: undefined, // 新闻总数
       newsType: '', // 新闻类型id
       maxPage: undefined, // 最大翻页数
@@ -50,12 +51,23 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('app', ['newsTypeId', 'appid', 'channelId'])
+    ...mapGetters('app', ['newsTypeId', 'utm_source', 'utm_campaign'])
+  },
+  watch: {
+    // 当前页与最大页相同时 则隐藏 loading more
+    newsQuery: {
+      handler(val) {
+        if (val.current === this.maxPage) {
+          this.maxLoading = true
+        }
+      },
+      deep: true
+    }
   },
   created() {
-    if (this.$route.query.appid) {
-      this.$store.dispatch('app/setAppId', this.$route.query.appid)
-      this.$store.dispatch('app/setChannelId', this.$route.query.channelId)
+    if (this.$route.query.utm_source) {
+      this.$store.dispatch('app/setAppId', this.$route.query.utm_source)
+      this.$store.dispatch('app/setChannelId', this.$route.query.utm_campaign)
     }
     this.newsQuery.type = this.newsTypeId
     this.getNewsList()
@@ -87,10 +99,6 @@ export default {
       this.loading = true
       try {
         this.newsQuery.current++
-        if (this.newsQuery.current >= this.maxPage) {
-          this.loading = false
-          return
-        }
         const result = await getAllNews(this.newsQuery)
         const { data } = result.data
         this.newsList = this.newsList.concat(data)
@@ -111,15 +119,15 @@ export default {
         background: 'rgba(0, 0, 0, 0.7)'
       })
       try {
+        this.newsList = []
         this.newsQuery.current = 1
         this.newsQuery.type = id
         const result = await getAllNews(this.newsQuery)
         const { data, total } = result.data
         this.maxPage = Math.ceil(total / this.newsQuery.size)
         this.total = total
-        this.newsList = []
-        // this.carouselList = this.newsList.splice(0, 3)
-        this.newsList = this.newsList.concat(data)
+        this.newsList = data
+        this.carouselList = this.newsList.splice(0, 3)
         loading.close()
       } catch (e) {
         loading.close()

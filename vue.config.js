@@ -6,7 +6,7 @@ function resolve(dir) {
 }
 
 const port = 8000 // 开启端口
-const baseUrl = '/'
+const baseUrl = './'
 const env = process.env.NODE_ENV
 
 module.exports = {

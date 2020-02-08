@@ -2,15 +2,15 @@
 const state = {
   sideStatus: false, // 侧边栏状态
   newsTypeId: '', // 当前新闻类型id
-  appid: '',
-  channelId: ''
+  utm_source: '',
+  utm_campaign: ''
 }
 
 const getters = {
   sideStatus: state => state.sideStatus,
   newsTypeId: state => state.newsTypeId,
-  appid: state => state.appid,
-  channelId: state => state.channelId
+  utm_source: state => state.utm_source,
+  utm_campaign: state => state.utm_campaign
 }
 
 const mutations = {
@@ -21,10 +21,10 @@ const mutations = {
     state.newsTypeId = id
   },
   SET_APPID(state, id) {
-    state.appid = id
+    state.utm_source = id
   },
   SET_CHANNELID(state, id) {
-    state.channelId = id
+    state.utm_campaign = id
   }
 }
 

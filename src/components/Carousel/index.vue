@@ -26,7 +26,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('app', ['appid', 'channelId'])
+    ...mapGetters('app', ['utm_source', 'utm_campaign'])
   },
   methods: {
     goArticle(id) {
@@ -36,8 +36,8 @@ export default {
           id
         },
         query: {
-          appid: this.appid,
-          channelId: this.channelId
+          utm_source: this.utm_source,
+          utm_campaign: this.utm_campaign
         }
       })
     }
