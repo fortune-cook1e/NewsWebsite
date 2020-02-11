@@ -2,6 +2,7 @@
   <div class="news">
     <Header />
     <side-bar />
+    <!-- <Ad1 /> -->
     <div class="news-detail">
       <div class="news-detail-title">
         {{ article.title }}
@@ -14,6 +15,7 @@
       </div>
       <div class="news-detail-content" v-html="article.detail" />
       <el-divider />
+      <!-- <Ad2 /> -->
       <h1 v-if="!loading">Most Popular</h1>
       <card-news :news="newsList" />
     </div>
@@ -28,13 +30,17 @@ import SideBar from '@/components/Sidebar'
 import CardNews from '@/components/CardNews'
 import Footer from '@/components/Footer'
 import { mapGetters } from 'vuex'
+import Ad1 from '@/components/Ad1'
+import Ad2 from '@/components/Ad2'
 export default {
   name: 'News',
   components: {
     Header,
     SideBar,
     CardNews,
-    Footer
+    Footer,
+    Ad1,
+    Ad2
   },
   data() {
     return {

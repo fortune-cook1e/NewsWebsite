@@ -2,6 +2,7 @@
   <div v-loading.fullscreen.lock="loading" class="home">
     <Header />
     <side-bar @get-type-news="getTypeNews" />
+    <!-- <Ad1 /> -->
     <Carousel :news="carouselList" />
     <card-news
       :news="newsList"
@@ -19,6 +20,7 @@ import SideBar from '@/components/Sidebar'
 import Carousel from '@/components/Carousel'
 import CardNews from '@/components/CardNews'
 import LoadingMore from '@/components/LoadingMore'
+import Ad1 from '@/components/Ad1'
 import Footer from '@/components/Footer'
 import { getAllNews } from '@/api'
 import { mapGetters } from 'vuex'
@@ -30,7 +32,8 @@ export default {
     CardNews,
     LoadingMore,
     Footer,
-    Header
+    Header,
+    Ad1
   },
   data() {
     return {
